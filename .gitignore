@@ -1,0 +1,4 @@
+.venv/
+.DS_Store
+tools/qr-output/
+__pycache__/

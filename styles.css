@@ -1,0 +1,207 @@
+/* The Social Circle
+   Palette 3. Each pastel has one job, used the same way everywhere:
+     lavender  brand + link underlines
+     yellow    the three steps (hero)
+     sky       "Someone at school"        (option + its message)
+     lavender  "A youth support service"  (option + its message)
+     mint      "A trusted adult"          (option + its message)
+     pink      urgent help
+   Edit the hex values here to match printed materials. */
+:root {
+  --yellow: #FFEDAD;
+  --lavender: #E4BDED;
+  --pink: #FFD3EF;
+  --sky: #C3E4FF;
+  --mint: #D0FFCA;
+  --white: #FFFFFF;
+  --ink: #30243D;
+  --ink-soft: #5A4D6B;      /* 7.6:1 on white */
+  --line: #30243D;          /* card borders */
+  --hairline: #E6DFEC;      /* row dividers */
+  --error: #9B1C4A;
+
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", "URW Palladio L", Georgia, serif;
+  --sans: "Avenir Next", Avenir, "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  --radius: 14px;
+  --col: 44rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--white);
+  overflow-wrap: break-word;
+}
+
+h1, h2, h3 { font-family: var(--serif); font-weight: 600; line-height: 1.15; margin: 0; letter-spacing: -0.005em; }
+h1 { font-size: clamp(2.2rem, 8vw, 3.4rem); }
+h2 { font-size: clamp(1.6rem, 5vw, 2.1rem); }
+h3 { font-size: 1.35rem; }
+p { margin: 0 0 0.8em; }
+p:last-child { margin-bottom: 0; }
+ol, ul { margin: 0; padding-left: 1.2em; }
+li + li { margin-top: 0.3em; }
+
+a {
+  color: var(--ink);
+  text-decoration-line: underline;
+  text-decoration-color: var(--lavender);
+  text-decoration-thickness: 3px;
+  text-underline-offset: 0.2em;
+}
+a:hover { text-decoration-color: var(--ink); }
+:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; border-radius: 4px; }
+
+.wrap { width: min(100% - 2.5rem, var(--col)); margin-inline: auto; }
+
+.skip-link {
+  position: absolute; left: 1rem; top: -4rem; z-index: 10;
+  background: var(--ink); color: var(--white); padding: 0.7rem 1rem; border-radius: 8px;
+}
+.skip-link:focus { top: 1rem; }
+
+/* The circle motif */
+.dot, .num {
+  flex: none; display: inline-grid; place-items: center;
+  border: 1.5px solid var(--ink); border-radius: 50%;
+}
+.dot { width: 1.1rem; height: 1.1rem; background: var(--tone, var(--lavender)); }
+[data-tone="school"]  { --tone: var(--sky); }
+[data-tone="service"] { --tone: var(--lavender); }
+[data-tone="adult"]   { --tone: var(--mint); }
+
+/* Header */
+.site-header { border-bottom: 1.5px solid var(--ink); }
+.header-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 0.25rem 1rem; flex-wrap: wrap; min-height: 3.75rem;
+}
+.brand {
+  display: inline-flex; align-items: center; gap: 0.6rem; min-height: 44px;
+  font-family: var(--serif); font-weight: 600; font-size: 1.15rem; text-decoration: none;
+}
+/* three overlapping circles */
+.brand-mark { display: inline-flex; }
+.brand-mark i {
+  width: 0.95rem; height: 0.95rem; border-radius: 50%;
+  border: 1.5px solid var(--ink); background: var(--sky);
+}
+.brand-mark i + i { margin-left: -0.35rem; }
+.brand-mark i:nth-child(2) { background: var(--lavender); }
+.brand-mark i:nth-child(3) { background: var(--mint); }
+.header-urgent { font-size: 0.95rem; font-weight: 600; min-height: 44px; display: inline-flex; align-items: center; text-decoration-color: var(--pink); }
+
+/* Hero */
+.hero { padding-block: clamp(2.5rem, 9vw, 5rem) clamp(2.5rem, 7vw, 4rem); }
+.lede { font-size: 1.15rem; color: var(--ink-soft); margin: 1.1rem 0 1.75rem; max-width: 36rem; }
+
+.steps { list-style: none; padding: 0; margin: 0 0 2rem; position: relative; }
+.steps li { display: flex; align-items: center; gap: 0.9rem; font-weight: 600; margin: 0; padding: 0.4rem 0; position: relative; }
+.num { width: 2.2rem; height: 2.2rem; background: var(--yellow); font-family: var(--serif); font-weight: 600; position: relative; z-index: 1; }
+/* thread linking the circles */
+.steps::before {
+  content: ""; position: absolute; left: calc(1.1rem - 0.75px); top: 1.5rem; bottom: 1.5rem;
+  border-left: 1.5px dashed var(--ink);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 48px; padding: 0.65rem 1.3rem; border-radius: 10px;
+  border: 1.5px solid var(--ink); font: inherit; font-weight: 600;
+  text-decoration: none; cursor: pointer; color: var(--ink); background: var(--white);
+}
+.btn-primary { background: var(--ink); color: var(--white); }
+.btn-primary:hover { background: #46365A; }
+.btn-quiet:hover { background: #FAF6FC; }
+.btn-text { border-color: transparent; text-decoration: underline; text-decoration-color: var(--lavender); text-decoration-thickness: 3px; text-underline-offset: 0.2em; }
+.btn[hidden], form[hidden] { display: none; }
+
+/* Sections */
+.section { padding-block: clamp(2.5rem, 7vw, 4rem); border-top: 1.5px solid var(--ink); }
+.section h2 { margin-bottom: 0.5rem; }
+.section-intro { color: var(--ink-soft); margin-bottom: 1.75rem; }
+
+/* Option cards */
+.option, .message, .plan, .urgent {
+  border: 1.5px solid var(--line); border-radius: var(--radius); background: var(--white);
+}
+.option { padding: 1.4rem 1.25rem 0.4rem; }
+.option + .option { margin-top: 1.25rem; }
+.option-head { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0.7rem; }
+.option-head .dot { width: 1.35rem; height: 1.35rem; }
+.option-when { color: var(--ink-soft); margin-bottom: 0.4rem; }
+.option-when strong { color: var(--ink); }
+
+/* label/value rows, shared by options and urgent box */
+.rows { margin: 0; }
+.rows > div { padding: 0.95rem 0; border-top: 1px solid var(--hairline); }
+.rows dt { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 0.35rem; }
+.rows dd { margin: 0; }
+@media (min-width: 40rem) {
+  .rows > div { display: grid; grid-template-columns: 10rem 1fr; gap: 1.25rem; }
+  .rows dt { margin: 0.2rem 0 0; }
+}
+
+.contacts { list-style: none; padding: 0; }
+.contacts li + li { margin-top: 0.75rem; }
+.contacts span { display: block; color: var(--ink-soft); font-size: 0.95rem; }
+.contact { font-weight: 700; white-space: nowrap; }
+.contacts .contact { display: inline-block; font-size: 1.15rem; padding-block: 0.3rem; }
+
+/* Starter messages */
+.message { padding: 1.25rem; }
+.message + .message { margin-top: 1rem; }
+.message-label { display: flex; align-items: center; gap: 0.6rem; font-weight: 600; margin-bottom: 0.6rem; }
+.message-text {
+  margin: 0 0 1rem; font-family: var(--serif); font-size: 1.25rem; line-height: 1.45;
+  user-select: text; -webkit-user-select: text;
+}
+.message-text::before { content: "“"; }
+.message-text::after { content: "”"; }
+.status { font-weight: 600; font-size: 0.95rem; margin: 0.6rem 0 0; }
+.status:empty { display: none; }
+
+/* Plan */
+.optional { font-family: var(--sans); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: var(--ink-soft); vertical-align: middle; margin-left: 0.3rem; }
+.plan { padding: 1.4rem 1.25rem; }
+.plan-sentence { font-family: var(--serif); font-size: 1.3rem; line-height: 1.6; margin-bottom: 1.4rem; }
+.blank { font-weight: 600; border-bottom: 2px solid var(--yellow); }
+.blank.empty { color: var(--ink-soft); font-weight: 400; font-style: italic; border-bottom-style: dashed; border-bottom-color: var(--ink-soft); }
+.fields { display: grid; gap: 1rem; }
+@media (min-width: 40rem) { .fields { grid-template-columns: 1fr 1fr; } }
+.field label { display: block; font-weight: 600; margin-bottom: 0.3rem; }
+.field input {
+  width: 100%; min-height: 48px; padding: 0.6rem 0.8rem; font: inherit; color: var(--ink);
+  background: var(--white); border: 1.5px solid var(--ink); border-radius: 10px;
+}
+.field input[aria-invalid="true"] { border-color: var(--error); border-width: 2.5px; }
+.hint { font-size: 0.9rem; color: var(--ink-soft); margin: 0.3rem 0 0; }
+.field-error { color: var(--error); font-weight: 600; font-size: 0.95rem; margin: 0.3rem 0 0; }
+.field-error:empty { display: none; }
+.actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.25rem; }
+.note { font-size: 0.95rem; color: var(--ink-soft); margin-top: 1rem; }
+
+/* Urgent */
+.urgent { padding: 1.4rem 1.25rem 0.4rem; border-width: 2.5px; }
+.urgent h2 { display: flex; align-items: center; gap: 0.7rem; font-size: 1.6rem; margin-bottom: 0.8rem; }
+.urgent h2::before {
+  content: ""; width: 1.35rem; height: 1.35rem; flex: none;
+  border: 1.5px solid var(--ink); border-radius: 50%; background: var(--pink);
+}
+
+/* Footer */
+.site-footer { border-top: 1.5px solid var(--ink); padding-block: 2.5rem 3rem; font-size: 0.95rem; color: var(--ink-soft); }
+.site-footer h2 { font-size: 1.2rem; color: var(--ink); margin-bottom: 0.8rem; }
+.site-footer strong { color: var(--ink); }
+.sources { list-style: none; padding: 0; margin-bottom: 1rem; }
+.sources li { margin: 0; }
+.sources a { display: inline-block; padding-block: 0.5rem; font-weight: 600; }
